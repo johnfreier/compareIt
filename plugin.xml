@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+<extension point="org.eclipse.ui.popupMenus"> 
+	<viewerContribution 
+		id="org.eclipse.ui.articles.action.contribution.popup.editor"
+		targetID="#AbstractTextEditorContext">
+		<action
+			id="org.eclipse.ui.articles.action.contribution.editor.compareit.copy" 
+			label="Compare text #1"
+			menubarPath="additions" 
+			class="com.eclipse.johnfreier.compareit.popup.actions.CompareItAction"> 
+      	</action>
+   	</viewerContribution> 
+</extension>
+</plugin>
