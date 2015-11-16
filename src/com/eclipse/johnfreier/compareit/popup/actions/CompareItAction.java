@@ -10,25 +10,17 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.jface.action.IAction;
+import org.eclipse.core.runtime.preferences.IEclipsePreferences;
+import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.text.TextSelection;
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IObjectActionDelegate;
-import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.texteditor.ITextEditor;
 
 public class CompareItAction extends AbstractHandler {
 
-	private Shell shell;
-
 	private String copied = new String();
-
-	private static final String COPY_1 = "Compare text #1";
-	private static final String COPY_2 = "Compare text #2";
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -44,15 +36,15 @@ public class CompareItAction extends AbstractHandler {
 
 				final TextSelection textSel = (TextSelection) sel;
 				String selectedCopy = textSel.getText();
+				
+				IEclipsePreferences preferences = InstanceScope.INSTANCE
+			    		  .getNode("com.eclipse.johnfreier.compareit.copy");
 
 				if (this.copied.isEmpty()) {
-					//event.getCommand().
-					//action.setText(COPY_2);
+					preferences.putBoolean("copy", true);
 					this.copied = selectedCopy;
 					return null;
 				}
-
-				//action.setText(COPY_1);
 
 				CompareConfiguration configuration = new CompareConfiguration();
 				CompareUI.openCompareDialog(new CompareEditorInput(
@@ -67,6 +59,7 @@ public class CompareItAction extends AbstractHandler {
 						String text2 = selectedCopy;
 
 						copied = "";
+						preferences.putBoolean("copy", false);
 
 						CompareItem left = new CompareItem("1", text1);
 						CompareItem right = new CompareItem("2", text2);

@@ -3,17 +3,23 @@
 <plugin>
 <extension point="org.eclipse.ui.menus">
 	<menuContribution
-         locationURI="popup:org.eclipse.ui.popup.any?after=additions">
-         <command
-               commandId="org.eclipse.ui.articles.action.contribution.editor.compareit.copy"
-               label="Compare text #1">
-         </command>
+		locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+		<dynamic 
+			id="com.eclipse.johnfreier.compareit.popup.actions.menuitem"
+			class="com.eclipse.johnfreier.compareit.popup.actions.CompareItCompoundContributionItem">
+		</dynamic>
 	</menuContribution> 
 </extension>
+<extension point="org.eclipse.ui.commands">
+	<command
+		id="com.eclipse.johnfreier.compareit.popup.actions.myCommand"
+		name="compareItCommand">
+     </command>
+</extension>
 <extension point="org.eclipse.ui.handlers">
-  <handler
-        class="com.eclipse.johnfreier.compareit.popup.actions.CompareItAction"
-        commandId="org.eclipse.ui.articles.action.contribution.editor.compareit.copy">
-  </handler>
+	<handler
+		commandId="com.eclipse.johnfreier.compareit.popup.actions.myCommand"
+		class="com.eclipse.johnfreier.compareit.popup.actions.CompareItAction">
+	</handler>
 </extension>
 </plugin>
