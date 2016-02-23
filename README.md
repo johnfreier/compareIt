@@ -26,3 +26,7 @@ This plugin was created after having running in to the scenario where I needed t
 2. Unzip
 3. Copy the contents to the plugin directory of eclipse.
 
+For Mars on OSX installed from Eclipse Installer
+1. Download the zip file.
+2. Unzip
+3. Copy the jar to the ./Eclipse.app/Contents/Eclipse/dropins
